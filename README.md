@@ -1,57 +1,98 @@
-# Sample Hardhat 3 Beta Project (`mocha` and `ethers`)
+# DioToken (DTK)
 
-This project showcases a Hardhat 3 Beta project using `mocha` for tests and the `ethers` library for Ethereum interactions.
+Token ERC-20 implementado em Solidity 0.8.28 usando Hardhat 3.
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+## 📝 Sobre
 
-## Project Overview
+**DioToken** é uma implementação do padrão ERC-20 com supply fixo de 10 DTK. Projeto desenvolvido com Hardhat 3 e TypeScript.
 
-This example project includes:
+**Token Info:**
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using `mocha` and ethers.js
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+- Nome: Dio Token
+- Símbolo: DTK
+- Decimais: 18
+- Supply: 10 DTK
 
-## Usage
+## 🚀 Quick Start
 
-### Running Tests
+```bash
+# Instalar dependências
+npm install
 
-To run all the tests in the project, execute the following command:
+# Compilar contratos
+npx hardhat compile
 
-```shell
+# Executar testes
 npx hardhat test
+
+# Deploy local
+npx hardhat run scripts/deploy.ts
 ```
 
-You can also selectively run the Solidity or `mocha` tests:
+## 🧪 Testes
 
-```shell
-npx hardhat test solidity
+```bash
+# Todos os testes
+npx hardhat test
+
+# Apenas testes TypeScript
 npx hardhat test mocha
 ```
 
-### Make a deployment to Sepolia
+## 📦 Deploy
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
+### Rede Local
 
-To run the deployment to a local chain:
+```bash
+# Terminal 1
+npx hardhat node
 
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
+# Terminal 2
+npx hardhat run scripts/deploy.ts --network localhost
 ```
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+## 🛠️ Stack
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
+- **Solidity** 0.8.28
+- **Hardhat** 3.1.10
+- **TypeScript** 5.8
+- **Ethers.js** 6.16.0
+- **Mocha + Chai** para testes
 
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
+## 📂 Estrutura
 
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
+```
+├── contracts/
+│   └── DioToken.sol       # Contrato ERC-20
+├── test/
+│   └── DioToken.test.ts   # Testes
+├── scripts/
+│   └── deploy.ts          # Script de deploy
+└── hardhat.config.ts      # Configuração
 ```
 
-After setting the variable, you can run the deployment with the Sepolia network:
+## 📖 Contrato
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+Implementação completa do ERC-20:
+
+```solidity
+// Funções principais
+function transfer(address recipient, uint256 amount) external returns (bool)
+function approve(address spender, uint256 amount) external returns (bool)
+function transferFrom(address sender, address recipient, uint256 amount) external returns (bool)
+
+// Consultas
+function balanceOf(address account) external view returns (uint256)
+function totalSupply() external view returns (uint256)
+function allowance(address owner, address spender) external view returns (uint256)
+```
+
+## 🔧 Comandos Úteis
+
+```bash
+npx hardhat compile           # Compilar
+npx hardhat test              # Testar
+npx hardhat node              # Node local
+npx hardhat console           # Console interativo
+npx hardhat clean             # Limpar cache
 ```
